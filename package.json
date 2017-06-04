@@ -1,0 +1,22 @@
+{
+  "name": "badmintonmap",
+  "version": "1.0.0",
+  "description": "tw badminton map",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Josephmtsai/badmintonmap.git"
+  },
+  "keywords": [
+    "badminton"
+  ],
+  "author": "joseph,andy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Josephmtsai/badmintonmap/issues"
+  },
+  "homepage": "https://github.com/Josephmtsai/badmintonmap#readme"
+}
