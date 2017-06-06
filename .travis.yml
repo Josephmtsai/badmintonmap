@@ -6,3 +6,8 @@ install:
   - pip install -r requirements.txt
 script:
   - pytest test.py
+deploy:
+  provider: Heroku
+  api_key: 
+    secure: wIYLtK3I4mhpLV1e6p33nTf6uTa4e57AkZWKChRyxspPI7uDtY3SAxkVIQhGWFJim9riViPnM+mCx+7j/CXinS2/SsvNIlMhASqyRhKzX4DGHObXQgFoJAnS8a8gVakIUrMAX2rgOtzlnku+JZQlVvz45o/h/059WgfzndPh/BvPEO7xethgGHczb+VKcYm8OcqqWr9ZK0Iq9wUTaWdbGdfD7G68KUc7VUh6Q0Ob+7frqNq4j0POre5yCaFd3wxTxiq+wGDx9SMw6f1ZFVwhU5KHDtlYxVHJFgZ9MV+Iobm8NVlZw2w6cZ40B6JKDFl3+KHeH+ikhrKX4lo8oYFovIllF9f4+ur4FJvCMuT3+u96KiKgafTIvVrtWSiu4s6TUTRFqkeGBrmI+4su1JqjOJ1b1Hrk7TyeFCd1Ia0q23KcN2qIA7Y2LacU2W/xQBaStoOrlIWnFFCdIEpVf/IVL3xmzBLV51OiAiExkzHZBoNH1ygdfO21rCkQhAi5yMOMm9NCkdCP3W3zPCv2X+Sjnea9mnHHUHGEsQBHq20i5Blt4mzAO+eZeeYN8tiWaWNB03Dr0LOq+16Bz5x9WH5VbO59GUmHbo6H9sFeIpG4P41O8KQxersJ9pbQ7P+wU6y5nEZTdSJwyzEF8vAVmNALktsgZtJzDIGEbHsSkPYXlXM=
+  app: qatbadmap
