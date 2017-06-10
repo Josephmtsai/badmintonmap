@@ -75,6 +75,7 @@ WSGI_APPLICATION = 'badmap.wsgi.application'
 
 
 db_from_env = dj_database_url.config()
+DATABASES ={}
 DATABASES['default'].update(db_from_env)
 
 # Password validation
