@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from badmapApp.views import home
+from badmapApp.views import apiCrawler
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',home)
+    url(r'^$',home),
+    url(r'^api/crawler$',apiCrawler)
 ]

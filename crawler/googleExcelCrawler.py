@@ -6,8 +6,8 @@ django.setup()
 import Common
 def syncExcelToDB(apiKey,excelsheetid): 
 	sheetList = [u'日',u'一',u'二',u'三',u'四',u'五',u'六']
-	service = discovery.build('sheets', 'v4', developerKey=CONFIGPARSER.get("DEFAULT", "apikey"),discoveryServiceUrl='https://sheets.googleapis.com/$discovery/rest?version=v4')
-	result = service.spreadsheets().values().batchGet(spreadsheetId=spreadsheetId,ranges=sheetList).execute()
+	service = discovery.build('sheets', 'v4', developerKey=apiKey,discoveryServiceUrl='https://sheets.googleapis.com/$discovery/rest?version=v4')
+	result = service.spreadsheets().values().batchGet(spreadsheetId=excelsheetid,ranges=sheetList).execute()
 	responseSheet = result.get('valueRanges', [])	
 	weekDay = Common.getTodayWeekDay()
 	#existlocationDict =googleMapLocation.getExistLocationToDict()

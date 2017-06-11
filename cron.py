@@ -6,7 +6,7 @@ import pymongo
 import os
 import datetime
 
-from crawler import googleExcelCrawler
+
 MONGO_URL = os.environ.get('MONGODB_URI')
 if not MONGO_URL:
     MONGO_URL = "mongodb://localhost:27017/rest";
@@ -14,7 +14,7 @@ if not MONGO_URL:
 def timed_job():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    print(googleExcelCrawler.syncExcelToDB(os.environ.get('MONGODB_URI'),"1sdEYj_w57iQaFhD5eNNOMLEhMbzlnhs7vR8Lz5RlChA"))
+    #print(googleExcelCrawler.syncExcelToDB(os.environ.get('MONGODB_URI'),"1sdEYj_w57iQaFhD5eNNOMLEhMbzlnhs7vR8Lz5RlChA"))
     print('This job is run every one minutes.')
 
 @sched.scheduled_job('cron', day_of_week='mon-fri', hour=17)
