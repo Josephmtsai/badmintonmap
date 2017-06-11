@@ -1,20 +1,20 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
+import subprocess
 
 sched = BlockingScheduler()
 import pymongo
 import os
 import datetime
+
 from crawler import googleExcelCrawler
 MONGO_URL = os.environ.get('MONGODB_URI')
-APIKEY = os.environ.get('GoogleAuthKey')
 if not MONGO_URL:
-    MONGO_URL = "mongodb://localhost:27017";
+    MONGO_URL = "mongodb://localhost:27017/rest";
 @sched.scheduled_job('interval', minutes=1)
 def timed_job():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    db.testing.insert_one({"x": 10,"date":datetime.datetime.now()})
-
+    googleExcelCrawler.syncExcelToDB(os.environ.get('MONGODB_URI'),"1sdEYj_w57iQaFhD5eNNOMLEhMbzlnhs7vR8Lz5RlChA")
     print('This job is run every one minutes.')
 
 @sched.scheduled_job('cron', day_of_week='mon-fri', hour=17)
