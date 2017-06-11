@@ -1,8 +1,6 @@
 import os 
-import django
-from badmapApp import models
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "badmap.settings")
-django.setup()
+
+
 import Common
 def syncExcelToDB(apiKey,excelsheetid): 
 	sheetList = [u'日',u'一',u'二',u'三',u'四',u'五',u'六']
