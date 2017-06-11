@@ -1,6 +1,6 @@
 import os 
 import django
-from myapp import models
+from badmapApp import models
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "badmap.settings")
 django.setup()
 import Common
