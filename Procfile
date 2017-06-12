@@ -1,2 +1,2 @@
-web: gunicorn badmap.wsgi
+web: gunicorn badmintonApp:app 
 clock: python cron.py
