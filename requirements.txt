@@ -7,3 +7,5 @@ whitenoise==3.2
 APScheduler==3.0.0
 pymongo==3.4.0
 newrelic==2.86.3.70
+google-api-python-client==1.6.2
+python-dateutil==2.6.0

@@ -1,5 +1,6 @@
 import os 
 import Common
+from apiclient import discovery
 def syncExcelToDB(apiKey,excelsheetid): 
 	sheetList = [u'日',u'一',u'二',u'三',u'四',u'五',u'六']
 	service = discovery.build('sheets', 'v4', developerKey=apiKey,discoveryServiceUrl='https://sheets.googleapis.com/$discovery/rest?version=v4')
