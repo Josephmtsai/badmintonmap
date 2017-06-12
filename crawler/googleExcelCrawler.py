@@ -1,5 +1,5 @@
 import os 
-import Common
+from Common import Common
 from apiclient import discovery
 def syncExcelToDB(apiKey,excelsheetid): 
 	sheetList = [u'日',u'一',u'二',u'三',u'四',u'五',u'六']
