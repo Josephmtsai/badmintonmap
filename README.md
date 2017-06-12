@@ -6,7 +6,7 @@
 
 ``` bash
 # install dependencies
-pip install -r requirement.txt
+pip install -r requirements.txt
 
 # start server
 python manage.py runserver
