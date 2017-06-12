@@ -1,6 +1,4 @@
 import os 
-
-
 import Common
 def syncExcelToDB(apiKey,excelsheetid): 
 	sheetList = [u'日',u'一',u'二',u'三',u'四',u'五',u'六']
@@ -18,7 +16,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 		for rowIndex,row in  enumerate( rows):  
 			if rowIndex == 1 or rowIndex ==0:
 				continue
-			badmintonInfo = models.badmintonInfo() 
+			badmintonInfo = {}
 			try:
 				if len(row) > 8:
 					badmintonInfo.location = row[1]
