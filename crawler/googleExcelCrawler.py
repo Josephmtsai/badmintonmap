@@ -20,7 +20,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 			badmintonInfo = {}
 			try:
 				if len(row) > 8:
-					badmintonInfo.location = row[1]
+					badmintonInfo['location'] = row[1]
 					"""
 					if existlocationDict is not None and badmintonInfo.location.encode('UTF-8') not in existlocationDict:
 						coordinate,address =  googleMapLocation.getLocationInfo(row[3]) 
@@ -30,16 +30,16 @@ def syncExcelToDB(apiKey,excelsheetid):
 						badmintonInfo.lng = coordinate['lng']
 						newLocationDict = googleMapLocation.locationToDict(newLocationDict,existlocationDict,badmintonInfo.location,address,coordinate)
 					"""
-					badmintonInfo.payInfo = Common.convertToInt(row[6])
-					badmintonInfo.contactName = row[7]
-					badmintonInfo.contactPhone = row[8]
-					badmintonInfo.startTime = Common.convertToDateTime(row[0].split("~")[0],index -weekDay)	
-					badmintonInfo.endTime = Common.convertToDateTime(row[0].split("~")[1],index -weekDay)
-					badmintonInfo.weekDay = sheetList[index]
-					badmintonInfo.weekDayInt = index
-					badmintonInfo.source = "excel"
-					badmintonInfo.line = row[9] if len(row) > 9 else ""
-					badmintonInfo.sourceData = ",".join(row ) 
+					badmintonInfo['.payInfo'] = Common.convertToInt(row[6])
+					badmintonInfo['contactName'] = row[7]
+					badmintonInfo['contactPhone'] = row[8]
+					badmintonInfo['startTime'] = Common.convertToDateTime(row[0].split("~")[0],index -weekDay)	
+					badmintonInfo['endTime'] = Common.convertToDateTime(row[0].split("~")[1],index -weekDay)
+					badmintonInfo['weekDay'] = sheetList[index]
+					badmintonInfo['weekDayInt'] = index
+					badmintonInfo['source'] = "excel"
+					badmintonInfo['line'] = row[9] if len(row) > 9 else ""
+					badmintonInfo['sourceData'] = ",".join(row ) 
 					#break
 			finally:					
 				badmintonInfoList.append(badmintonInfo)
