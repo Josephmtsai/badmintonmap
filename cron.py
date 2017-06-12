@@ -17,7 +17,7 @@ def timed_job():
     db = client.heroku_szv1xx0f
     badmintonInfoList = googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1sdEYj_w57iQaFhD5eNNOMLEhMbzlnhs7vR8Lz5RlChA")
     if len(badmintonInfoList) > 0:
-        db.insert_many(badmintonInfoList)
+        db.badmintonInfo.insert_many(badmintonInfoList)
         print('This job is insert data')
     print('This job is run every 3 minutes.')
 
