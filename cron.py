@@ -15,7 +15,7 @@ if not MONGO_URL:
 def timed_job():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    badmintonInfoList = googleExcelCrawler.syncExcelToDB(os.environ.get('MONGODB_URI'),"1sdEYj_w57iQaFhD5eNNOMLEhMbzlnhs7vR8Lz5RlChA")
+    badmintonInfoList = googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1sdEYj_w57iQaFhD5eNNOMLEhMbzlnhs7vR8Lz5RlChA")
     if len(badmintonInfoList) > 0:
         db.insert_many(badmintonInfoList)
         print('This job is insert data')
