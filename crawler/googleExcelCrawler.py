@@ -30,7 +30,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 						badmintonInfo.lng = coordinate['lng']
 						newLocationDict = googleMapLocation.locationToDict(newLocationDict,existlocationDict,badmintonInfo.location,address,coordinate)
 					"""
-					badmintonInfo['.payInfo'] = Common.convertToInt(row[6])
+					badmintonInfo['payInfo'] = Common.convertToInt(row[6])
 					badmintonInfo['contactName'] = row[7]
 					badmintonInfo['contactPhone'] = row[8]
 					badmintonInfo['startTime'] = Common.convertToDateTime(row[0].split("~")[0],index -weekDay)	
