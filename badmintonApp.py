@@ -2,7 +2,7 @@ from flask import Flask
 app = Flask(__name__)
 import pymongo
 from bson.json_util import dumps
-
+from flask_restful import Resource, Api
 api = Api(app)
 class HelloWorld(Resource):
     def get(self):
