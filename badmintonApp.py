@@ -3,7 +3,6 @@ app = Flask(__name__)
 import pymongo
 from bson.json_util import dumps
 
-dumps(l)
 api = Api(app)
 class HelloWorld(Resource):
     def get(self):
