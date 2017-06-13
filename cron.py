@@ -20,12 +20,8 @@ def crawler_job():
         db.badmintonInfo.insert_many(badmintonInfoList)
         print('This job is insert data')
     print('This job is run every 360 minutes.')
-
-
 @sched.scheduled_job('interval', minutes=3)
 def timed_job():
     response = requests.get(os.environ.get('CURRENTDOMAIN'))
-    print("Current Page Status " +str(response.status_code )
-
-
+    print("Current Page Status " +str(response.status_code ))
 sched.start()
