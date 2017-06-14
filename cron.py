@@ -7,7 +7,7 @@ from crawler import googleExcelCrawler
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', minutes=360)
+@sched.scheduled_job('interval', minutes=10)
 def crawler_job():
     googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1sdEYj_w57iQaFhD5eNNOMLEhMbzlnhs7vR8Lz5RlChA")
     print('This job is insert data')
@@ -16,7 +16,5 @@ def crawler_job():
 def timed_job():
     response = requests.get(os.environ.get('CURRENTDOMAIN'))
     print("Current Page Status " +str(response.status_code ))
-@sched.scheduled_job('interval', minutes=1)
-def crawler_job2():
-    print("Time interval 1")	
+
 sched.start()
