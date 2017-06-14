@@ -1,6 +1,6 @@
 import os 
 from apiclient import discovery
-from Common import dbHandler
+from dbHandler import dbHandler
 
 from Common import Common
 def syncExcelToDB(apiKey,excelsheetid): 
