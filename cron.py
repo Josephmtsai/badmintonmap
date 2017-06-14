@@ -17,6 +17,6 @@ def timed_job():
     response = requests.get(os.environ.get('CURRENTDOMAIN'))
     print("Current Page Status " +str(response.status_code ))
 @sched.scheduled_job('interval', minutes=1)
-def timed_job2():
+def crawler_job2():
     print("Time interval 1")	
 sched.start()
