@@ -20,11 +20,11 @@ def insertLocationInfoList(locationInfoList):
     return "Nothing Insert"
 
 
-def insertbadmintonInfoList(badmintonInfoList):
+def insertbadmintonInfoList(locationInfoList):
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
     if len(locationInfoList) > 0:
-        db.badmintonInfo.insert_many(badmintonInfoList)
+        db.badmintonInfo.insert_many(locationInfoList)
         print("Insert BadmintonList OK")
         return "OK"
     return "Nothing Insert"
