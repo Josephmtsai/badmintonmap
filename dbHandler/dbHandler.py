@@ -31,7 +31,7 @@ def insertbadmintonInfoList(badmintonInfoList):
         print("Insert BadmintonList OK")
         return "OK"
     return "Nothing Insert"
-def getbadmintonInfoList(badmintonInfoList):
+def getbadmintonInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
     return dumps(db.badmintonInfoList.find())
