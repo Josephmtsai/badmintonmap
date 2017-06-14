@@ -7,9 +7,6 @@ from crawler import googleExcelCrawler
 
 sched = BlockingScheduler()
 
-
-if not MONGO_URL:
-    MONGO_URL = "mongodb://localhost:27017/rest";
 @sched.scheduled_job('interval', minutes=360)
 def crawler_job():
     googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1sdEYj_w57iQaFhD5eNNOMLEhMbzlnhs7vR8Lz5RlChA")
