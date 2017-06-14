@@ -19,16 +19,22 @@ def insertLocationInfoList(locationInfoList):
         return "OK"
     return "Nothing Insert"
 
-
-def insertbadmintonInfoList(locationInfoList):
+def getLocationInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    if len(locationInfoList) > 0:
-        db.badmintonInfo.insert_many(locationInfoList)
+    return dumps(db.LocationList.find())
+def insertbadmintonInfoList(badmintonInfoList):
+    client = pymongo.MongoClient(MONGO_URL)
+    db = client.heroku_szv1xx0f
+    if len(badmintonInfoList) > 0:
+        db.badmintonInfo.insert_many(badmintonInfoList)
         print("Insert BadmintonList OK")
         return "OK"
     return "Nothing Insert"
-
+def getbadmintonInfoList(badmintonInfoList):
+    client = pymongo.MongoClient(MONGO_URL)
+    db = client.heroku_szv1xx0f
+    return dumps(db.badmintonInfoList.find())
 def deleteAllbadmintonInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
