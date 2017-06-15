@@ -8,7 +8,7 @@ MONGO_URL = os.environ.get('MONGODB_URI')
 def getLocationInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    return dumps(db.locationInfo.find())
+    return dumps(db.locationInfo.find(), ensure_ascii=False).encode('utf8')
 
 
 def insertLocationInfoList(locationInfoList):
@@ -35,7 +35,7 @@ def insertbadmintonInfoList(badmintonInfoList):
 def getbadmintonInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    return dumps(db.badmintonInfo.find({}))
+    return dumps(db.badmintonInfo.find({}), ensure_ascii=False).encode('utf8')
 def deleteAllbadmintonInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
