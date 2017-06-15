@@ -6,8 +6,6 @@ from bson.json_util import dumps
 from flask_restful import Resource, Api
 from crawler import googleExcelCrawler
 import dbHandler
-from flask.ext.restful.representations.json import output_json
-output_json.func_globals['settings'] = {'ensure_ascii': False, 'encoding': 'utf8'}
 api = Api(app)
 class HelloWorld(Resource):
     def get(self):
