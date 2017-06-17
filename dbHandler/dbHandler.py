@@ -35,7 +35,8 @@ def insertbadmintonInfoList(badmintonInfoList):
 def getbadmintonInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    return dumps(db.badmintonInfo.find({}))
+    return dumps(db.badmintonInfo.find({}),ensure_ascii=False)
+    
 def deleteAllbadmintonInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f

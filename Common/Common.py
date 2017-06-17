@@ -13,10 +13,10 @@ def convertToDateTime(input,weekday):
         minuteValue = '0'
         if len( timeArray) > 1:
             minuteValue =timeArray[1]
-        result = datetime( datetime.today().year,datetime.today().month ,datetime.today().day,  int(timeArray[0]), int(minuteValue),0,0) + timedelta(days=weekday)
+        result = datetime(datetime.today().year, datetime.today().month ,datetime.today().day, int(timeArray[0]), int(minuteValue),0,0) + timedelta(days=weekday)
     except ValueError:
         result = datetime(1970,1,1,0, 0,0,0)    
-    return result
+    return result.strftime("%Y-%m-%d %H:%M")
 
 def getTodayWeekDay():
     return datetime.today().weekday()    

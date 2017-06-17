@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask, make_response
 import pymongo
-from bson.json_util import dumps
+import os
 from flask_restful import Resource, Api
 from crawler import googleExcelCrawler
 import dbHandler
+
+app = Flask(__name__)
 api = Api(app)
 class HelloWorld(Resource):
     def get(self):
-        return {'hello': 'world'}
+        return "你好"
 
 
 class getBadmintonInfoList(Resource):
     def get(self):
-        return dbHandler.dbHandler.getbadmintonInfoList()
+        return make_response(dbHandler.dbHandler.getbadmintonInfoList())
 
 
 class CrawlerBadmintonExcelList(Resource):
