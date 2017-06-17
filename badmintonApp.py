@@ -2,6 +2,7 @@
 from flask import Flask, make_response
 import pymongo
 import os
+import settings 
 from flask_restful import Resource, Api
 from crawler import googleExcelCrawler
 import dbHandler

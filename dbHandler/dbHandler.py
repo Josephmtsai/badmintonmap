@@ -2,6 +2,7 @@
 import pymongo
 from bson.json_util import dumps
 import os
+import settings
 MONGO_URL = os.environ.get('MONGODB_URI')
 
 

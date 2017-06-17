@@ -9,8 +9,23 @@ python 3.x install
 ## Build Setup
 
 ``` bash
-# install dependencies
+# first create virtual env
+python -m venv c:\path\to\myenv 
+
+# clone the project use git or download and extract to the folder
+
+# use the virtual env
+
+Scripts\activate 
+>if suceess will see the virtual env nam 
+
+#then  install dependencies
 pip install -r requirements.txt
+
+#create .env file and excute the command to pull the envirment variable to local 
+
+heroku config:get GoogleAuthKey -s  >> .env --app=qatbadmap
+heroku config:get MONGODB_URI -s  >> .env --app=qatbadmap
 ```
 
 ## Start program
