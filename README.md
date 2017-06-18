@@ -33,3 +33,11 @@ heroku config:get MONGODB_URI -s  >> .env --app=qatbadmap
 ``` bash
 python badmintonApp.py
 ```
+
+## Debug mode
+
+``` bash
+set FLASK_DEBUG=1
+set FLASK_APP=badmintonApp.py
+flask run
+```
