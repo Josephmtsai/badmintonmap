@@ -36,8 +36,14 @@ python badmintonApp.py
 
 ## Debug mode
 
+Auto reload when code change, see [flask-debug-mode](http://flask.pocoo.org/docs/0.12/quickstart/#debug-mode)
+
 ``` bash
 set FLASK_DEBUG=1
 set FLASK_APP=badmintonApp.py
 flask run
 ```
+
+## Reference
+
+[Flask](http://flask.pocoo.org/docs/0.12/quickstart/#)
