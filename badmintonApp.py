@@ -13,7 +13,7 @@ api = Api(app)
 cors = CORS(app, resources={r"/api/*": {"origins": r"(.*).herokuapp.com"}})
 class HelloWorld(Resource):
     def get(self):
-        return "你好"
+        return "你好 from flask-rest"
 
 
 class BadmintonInfoList(Resource):
