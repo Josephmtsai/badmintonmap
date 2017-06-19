@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*- 
-import urllib2
+from urllib.request import urlopen
 import json 
-from urllib import quote
-
+from dbHandler import dbHandler
 def getLocationInfo(address,apiKey):
     print(address.encode("UTF-8"))
-    returnContent = urllib2.urlopen("https://maps.googleapis.com/maps/api/geocode/json?address="+address.encode("UTF-8") + "&key="+apiKey).read().decode('utf8')
+    returnContent = urlopen("https://maps.googleapis.com/maps/api/geocode/json?address="+address.encode("UTF-8") + "&key="+apiKey).read().decode('utf8')
     result = json.loads(returnContent)
-    print(result['results'])
-    if len( result['results']) > 0 :
-        location = ''
-        address = ''
-        for possibleLocation in result['results']:
-            location = possibleLocation['geometry']['location']
-            address = possibleLocation['formatted_address']
-            break
-        return location,address
-    return None,None
+    if result['status'] == "OK":
+        if len( result['results']) > 0 :
+            location = ''
+            address = ''
+            for possibleLocation in result['results']:
+                location = possibleLocation['geometry']['location']
+                address = possibleLocation['formatted_address']
+                break
+            return location,address,"OK"
+        return None,None,"OK"
+    return None,None,None
 def getExistLocationToDict():
     locationList = dbHandler.getDBLocation()
     existLocationDict = {}

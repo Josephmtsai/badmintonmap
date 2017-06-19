@@ -1,7 +1,7 @@
 import os 
 from apiclient import discovery
 from dbHandler import dbHandler
-
+from crawler import googleMapLocation
 from Common import Common
 def syncExcelToDB(apiKey,excelsheetid): 
 	sheetList = [u'日',u'一',u'二',u'三',u'四',u'五',u'六']
@@ -9,7 +9,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 	result = service.spreadsheets().values().batchGet(spreadsheetId=excelsheetid,ranges=sheetList).execute()
 	responseSheet = result.get('valueRanges', [])	
 	weekDay = Common.getTodayWeekDay()
-	#existlocationDict =googleMapLocation.getExistLocationToDict()
+	existlocationDict =googleMapLocation.getExistLocationToDict()
 	newLocationDict = {}
 	badmintonInfoList = []
 	coordinate = None
@@ -23,15 +23,14 @@ def syncExcelToDB(apiKey,excelsheetid):
 			try:
 				if len(row) > 8:
 					badmintonInfo['location'] = row[1]
-					"""
-					if existlocationDict is not None and badmintonInfo['location.encode('UTF-8') not in existlocationDict:
-						coordinate,address =  googleMapLocation.getLocationInfo(row[3]) 
+					if existlocationDict is not None and badmintonInfo["location.encode('UTF-8')"] not in existlocationDict:
+						coordinate,address,status =  googleMapLocation.getLocationInfo(row[3]) 
 					if coordinate is not None:
-						badmintonInfo['address = address
-						badmintonInfo['lat = coordinate['lat']
-						badmintonInfo['lng = coordinate['lng']
-						newLocationDict = googleMapLocation.locationToDict(newLocationDict,existlocationDict,badmintonInfo['location,address,coordinate)
-					"""
+						badmintonInfo['address'] = address
+						badmintonInfo['lats'] = coordinate['lat']
+						badmintonInfo['lngs'] = coordinate['lng']
+						#if status is not None:
+						#newLocationDict = googleMapLocation.locationToDict(newLocationDict,existlocationDict,badmintonInfo['location,address,coordinate)
 					badmintonInfo['payInfo'] = Common.convertToInt(row[6])
 					badmintonInfo['contactName'] = row[7]
 					badmintonInfo['contactPhone'] = row[8]
@@ -46,4 +45,3 @@ def syncExcelToDB(apiKey,excelsheetid):
 			finally:					
 				badmintonInfoList.append(badmintonInfo)
 	return dbHandler.insertbadmintonInfoList(badmintonInfoList)
-		#insertLocationInfoList(newLocationDict)
