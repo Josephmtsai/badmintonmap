@@ -23,7 +23,7 @@ def getExistLocationToDict():
     existLocationDict = {}
     if locationList is not None:
         for location in locationList:
-            locationToDict(existLocationDict,{},location.name,location.address,{'lat':location.lat,'lng':location.lng})
+            locationToDict(existLocationDict,{},location.name,location.address,{'lat':location.lat,'lng':location.lng,'name': location})
     return existLocationDict
 
 def locationToDict(newLocationDict,existLocationDict,location,address,coordinate):

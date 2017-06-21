@@ -24,7 +24,7 @@ def insertLocationInfoList(locationInfoList):
 def getLocationInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    return db.LocationList.find()
+    return db.locationInfo.find()
 def insertbadmintonInfoList(badmintonInfoList):
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
