@@ -6,11 +6,11 @@ import settings
 MONGO_URL = os.environ.get('MONGODB_URI')
 
 
-def getLocationInfoList():
+
+def insertStatus(status):
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    return dumps(db.locationInfo.find())
-
+    db.status.insert_one(status)    
 
 def insertLocationInfoList(locationInfoList):
     client = pymongo.MongoClient(MONGO_URL)
@@ -29,6 +29,7 @@ def insertbadmintonInfoList(badmintonInfoList):
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
     if len(badmintonInfoList) > 0:
+        deleteAllbadmintonInfoList()
         db.badmintonInfo.insert_many(badmintonInfoList)
         print("Insert BadmintonList OK")
         return "OK"

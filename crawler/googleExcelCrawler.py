@@ -3,6 +3,7 @@ from apiclient import discovery
 from dbHandler import dbHandler
 from crawler import googleMapLocation
 from Common import Common
+import datetime
 def syncExcelToDB(apiKey,excelsheetid): 
 	sheetList = [u'日',u'一',u'二',u'三',u'四',u'五',u'六']
 	service = discovery.build('sheets', 'v4', developerKey=apiKey,discoveryServiceUrl='https://sheets.googleapis.com/$discovery/rest?version=v4')
@@ -23,14 +24,14 @@ def syncExcelToDB(apiKey,excelsheetid):
 			try:
 				if len(row) > 8:
 					badmintonInfo['location'] = row[1]
-					if existlocationDict is not None and badmintonInfo["location.encode('UTF-8')"] not in existlocationDict:
-						coordinate,address,status =  googleMapLocation.getLocationInfo(row[3]) 
+					if existlocationDict is not None and badmintonInfo['location'].encode('UTF-8') not in existlocationDict:
+						coordinate,address,status =  googleMapLocation.getLocationInfo(row[3],apiKey) 
 					if coordinate is not None:
 						badmintonInfo['address'] = address
 						badmintonInfo['lats'] = coordinate['lat']
 						badmintonInfo['lngs'] = coordinate['lng']
-						#if status is not None:
-						#newLocationDict = googleMapLocation.locationToDict(newLocationDict,existlocationDict,badmintonInfo['location,address,coordinate)
+						if status is not None:
+							newLocationDict = googleMapLocation.locationToDict(newLocationDict,existlocationDict,badmintonInfo['location'],address,coordinate)
 					badmintonInfo['payInfo'] = Common.convertToInt(row[6])
 					badmintonInfo['contactName'] = row[7]
 					badmintonInfo['contactPhone'] = row[8]
@@ -44,4 +45,8 @@ def syncExcelToDB(apiKey,excelsheetid):
 					#break
 			finally:					
 				badmintonInfoList.append(badmintonInfo)
+	locationList = googleMapLocation.dictToLocationInfoList(newLocationDict)
+	if len(locationList) >0:
+		dbHandler.insertLocationInfoList(locationList)
+	dbHandler.insertStatus({'locationInsert':len(locationList) ,'Time' : datetime.datetime.utcnow() + datetime.timedelta(hours=+8)  })
 	return dbHandler.insertbadmintonInfoList(badmintonInfoList)

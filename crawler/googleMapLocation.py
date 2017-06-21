@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*- 
 from urllib.request import urlopen
+import urllib
 import json 
 from dbHandler import dbHandler
 def getLocationInfo(address,apiKey):
-    print(address.encode("UTF-8"))
-    returnContent = urlopen("https://maps.googleapis.com/maps/api/geocode/json?address="+address.encode("UTF-8") + "&key="+apiKey).read().decode('utf8')
+    #print("https://maps.googleapis.com/maps/api/geocode/json?address="+ urllib.parse.quote(address)  + "&key="+apiKey)
+    returnContent = urlopen("https://maps.googleapis.com/maps/api/geocode/json?address="+urllib.parse.quote(address)  + "&key="+apiKey).read().decode('utf-8')
     result = json.loads(returnContent)
     if result['status'] == "OK":
         if len( result['results']) > 0 :
@@ -18,7 +19,7 @@ def getLocationInfo(address,apiKey):
         return None,None,"OK"
     return None,None,None
 def getExistLocationToDict():
-    locationList = dbHandler.getDBLocation()
+    locationList = dbHandler.getLocationInfoList()
     existLocationDict = {}
     if locationList is not None:
         for location in locationList:
@@ -27,6 +28,13 @@ def getExistLocationToDict():
 
 def locationToDict(newLocationDict,existLocationDict,location,address,coordinate):
     if location is not None and location.encode('UTF-8') not in existLocationDict:
-        newLocationDict[location.encode('UTF-8')] = {'address':address ,'lat':coordinate['lat'],'lng':coordinate['lng'] }
+        newLocationDict[location.encode('UTF-8')] = {'address':address ,'lat':coordinate['lat'],'lng':coordinate['lng'],'name': location }
     return newLocationDict
 
+def dictToLocationInfoList(locationDict):
+    locationList = []
+    print(locationDict)
+    if locationDict is not None:	
+        for key in locationDict:
+            locationList.append(locationDict[key])
+    return locationList
