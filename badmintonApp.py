@@ -7,6 +7,7 @@ import settings
 from flask_restful import Resource, Api
 from crawler import googleExcelCrawler
 import dbHandler
+from bson.json_util import dumps
 
 app = Flask(__name__)
 api = Api(app)
@@ -22,8 +23,8 @@ class BadmintonInfoList(Resource):
 
 
 class LocationInfoList(Resource):
-    def get(self,location,dateTime):
-        return make_response(dbHandler.dbHandler.getbadmintonInfoList())
+    def get(self,location=None,dateTime=None):
+        return make_response(dumps(dbHandler.dbHandler.getLocationInfoList(location),ensure_ascii=False))
 
 
 class CrawlerBadmintonExcelList(Resource):

@@ -21,10 +21,14 @@ def insertLocationInfoList(locationInfoList):
         return "OK"
     return "Nothing Insert"
 
-def getLocationInfoList():
+def getLocationInfoList(locationName=None):
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    return db.locationInfo.find()
+    if locationName is not None:
+        print(locationName)
+        return db.locationInfo.find({'name':locationName})
+    else:
+        return db.locationInfo.find({})
 def insertbadmintonInfoList(badmintonInfoList):
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
