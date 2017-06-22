@@ -24,6 +24,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 			try:
 				if len(row) > 8:
 					badmintonInfo['location'] = row[1]
+					print(existlocationDict)
 					if existlocationDict is not None and badmintonInfo['location'].encode('UTF-8') not in existlocationDict:
 						coordinate,address,status =  googleMapLocation.getLocationInfo(row[3],apiKey) 
 					if coordinate is not None:

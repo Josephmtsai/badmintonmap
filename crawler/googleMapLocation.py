@@ -22,8 +22,8 @@ def getExistLocationToDict():
     locationList = dbHandler.getLocationInfoList()
     existLocationDict = {}
     if locationList is not None:
-        for location in locationList:
-            locationToDict(existLocationDict,{},location.name,location.address,{'lat':location.lat,'lng':location.lng,'name': location})
+        for locationInfo in locationList:
+            locationToDict(existLocationDict,{},locationInfo['name'],locationInfo['address'],{'lat':locationInfo['lat'],'lng':locationInfo['lng'],'name': locationInfo['name']})
     return existLocationDict
 
 def locationToDict(newLocationDict,existLocationDict,location,address,coordinate):
