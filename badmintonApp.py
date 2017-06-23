@@ -4,7 +4,7 @@ from flask_cors import CORS
 import pymongo
 import os
 import settings 
-from flask_restful import Resource, Api
+from flask_restful import Resource, Api, reqparse
 from crawler import googleExcelCrawler
 import dbHandler
 from bson.json_util import dumps
@@ -23,8 +23,11 @@ class BadmintonInfoList(Resource):
 
 
 class LocationInfoList(Resource):
-    def get(self,location=None,dateTime=None):
-        return make_response(dumps(dbHandler.dbHandler.getLocationInfoList(location),ensure_ascii=False))
+    def get(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument('location', type=str, help='location must be string')
+        args = self.parser.parse_args()      
+        return make_response(dumps(dbHandler.dbHandler.getLocationInfoList(args['location']),ensure_ascii=False))
 
 
 class CrawlerBadmintonExcelList(Resource):
