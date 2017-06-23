@@ -19,7 +19,7 @@ class HelloWorld(Resource):
 
 class BadmintonInfoList(Resource):
     def get(self,location,dateTime):
-        return make_response(dbHandler.dbHandler.getbadmintonInfoList())
+        return make_response(dumps(dbHandler.dbHandler.getbadmintonInfoList(),ensure_ascii=False))
 
 
 class LocationInfoList(Resource):
