@@ -12,7 +12,7 @@ def crawler_job():
     googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1sdEYj_w57iQaFhD5eNNOMLEhMbzlnhs7vR8Lz5RlChA")
     print('This job is insert data')
     print('This job is run every 360 minutes.')
-@sched.scheduled_job('interval', minutes=3)
+@sched.scheduled_job('interval', minutes=10)
 def timed_job():
     response = requests.get(os.environ.get('CURRENTDOMAIN'))
     print("Current Page Status " +str(response.status_code ))
