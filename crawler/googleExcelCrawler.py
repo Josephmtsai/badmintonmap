@@ -44,6 +44,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 					else:
 						badmintonInfo['contactPhone'] = row[8]
 					badmintonInfo['startTime'] = Common.convertToDateTime(row[0].split("~")[0],index -weekDay)	
+					badmintonInfo['startTimeMillis'] = Common.unix_time_millis(row[0].split("~")[0])	
 					badmintonInfo['endTime'] = Common.convertToDateTime(row[0].split("~")[1],index -weekDay)
 					badmintonInfo['weekDay'] = sheetList[index]
 					badmintonInfo['weekDayInt'] = index

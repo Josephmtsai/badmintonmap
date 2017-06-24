@@ -20,3 +20,7 @@ def convertToDateTime(input,weekday):
 
 def getTodayWeekDay():
     return datetime.today().weekday()    
+
+def unix_time_millis(dt):
+	epoch = datetime.utcfromtimestamp(0)
+	return (dt - epoch).total_seconds() * 1000.0	
