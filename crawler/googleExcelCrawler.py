@@ -43,9 +43,9 @@ def syncExcelToDB(apiKey,excelsheetid):
 						badmintonInfo['contactPhone'] = re.search(r'=HYPERLINK\("(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/(.*)","(.*)"\)',row[8]).group(5)
 					else:
 						badmintonInfo['contactPhone'] = row[8]
-					badmintonInfo['startTime'] = Common.convertToDateTime(row[0].split("~")[0],index -weekDay)	
-					badmintonInfo['startTimeMillis'] = badmintonInfo['startTime'] 
-					badmintonInfo['endTime'] = Common.convertToDateTime(row[0].split("~")[1],index -weekDay)
+					badmintonInfo['startTime'] = Common.convertToSTRDateTime(row[0].split("~")[0],index -weekDay)	
+					badmintonInfo['startTimeMillis'] = Common.unix_tme_millis( Common.convertToDateTime(row[0].split("~")[0],index -weekDay)	)	
+					badmintonInfo['endTime'] = Common.convertToSTRDateTime(row[0].split("~")[1],index -weekDay)
 					badmintonInfo['weekDay'] = sheetList[index]
 					badmintonInfo['weekDayInt'] = index
 					badmintonInfo['source'] = "excel"
