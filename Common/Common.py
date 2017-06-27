@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-
 def convertToInt(input):
     try:
         result = int(input)
