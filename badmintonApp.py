@@ -18,7 +18,7 @@ class HelloWorld(Resource):
 
 
 class BadmintonInfoList(Resource):
-    def get(self,location,dateTime):
+    def get(self):
         return make_response(dumps(dbHandler.dbHandler.getbadmintonInfoList(),ensure_ascii=False))
 
 
@@ -32,7 +32,7 @@ class LocationInfoList(Resource):
 
 class CrawlerBadmintonExcelList(Resource):
     def get(self):
-        return googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1sdEYj_w57iQaFhD5eNNOMLEhMbzlnhs7vR8Lz5RlChA")
+        return googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1E-u9WqCuOvQNXPDEweq4lgjQcN2-DiVQBygFmBm8HY8")
 api.add_resource(HelloWorld, '/')
 api.add_resource(LocationInfoList,'/api/locationinfolist')
 api.add_resource(BadmintonInfoList,'/api/badmintoninfolist')
