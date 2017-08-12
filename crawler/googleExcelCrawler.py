@@ -33,8 +33,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 						coordinate,address,status =  googleMapLocation.getLocationInfo(row[3],apiKey) 
 					if coordinate is not None:
 						badmintonInfo['address'] = address
-						badmintonInfo['lats'] = coordinate['lat']
-						badmintonInfo['lngs'] = coordinate['lng']
+						badmintonInfo['position'] = {'lat':coordinate['lat'],'lng':coordinate['lng']}
 						if status is not None:
 							newLocationDict = googleMapLocation.locationToDict(newLocationDict,existlocationDict,badmintonInfo['location'],address,coordinate)
 					badmintonInfo['payInfo'] = Common.convertToInt(row[6])

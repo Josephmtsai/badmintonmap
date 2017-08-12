@@ -28,7 +28,7 @@ def getExistLocationToDict():
 
 def locationToDict(newLocationDict,existLocationDict,location,address,coordinate):
     if location is not None and location.encode('UTF-8') not in existLocationDict:
-        newLocationDict[location.encode('UTF-8')] = {'address':address ,'lat':coordinate['lat'],'lng':coordinate['lng'],'name': location }
+        newLocationDict[location.encode('UTF-8')] = {'address':address ,'position':{'lat':coordinate['lat'],'lng':coordinate['lng']},'name': location }
     return newLocationDict
 
 def dictToLocationInfoList(locationDict):
