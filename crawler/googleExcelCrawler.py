@@ -31,11 +31,13 @@ def syncExcelToDB(apiKey,excelsheetid):
 					#print(existlocationDict)
 					if existlocationDict is not None and badmintonInfo['location'].encode('UTF-8') not in existlocationDict:
 						coordinate,address,status =  googleMapLocation.getLocationInfo(row[3],apiKey) 
-					if coordinate is not None:
-						badmintonInfo['address'] = address
-						badmintonInfo['position'] = {'lat':coordinate['lat'],'lng':coordinate['lng']}
-						if status is not None:
-							newLocationDict = googleMapLocation.locationToDict(newLocationDict,existlocationDict,badmintonInfo['location'],address,coordinate)
+						if coordinate is not None:
+							badmintonInfo['address'] = address
+							badmintonInfo['position'] = {'lat':coordinate['lat'],'lng':coordinate['lng']}
+							if status is not None:
+								newLocationDict = googleMapLocation.locationToDict(newLocationDict,existlocationDict,badmintonInfo['location'],address,coordinate)
+					elif existlocationDict is not None and badmintonInfo['location'].encode('UTF-8')  in existlocationDict:
+						badmintonInfo['position'] = existlocationDict[badmintonInfo['location'].encode('UTF-8')]['position']
 					badmintonInfo['payInfo'] = Common.convertToInt(row[6])
 					badmintonInfo['contactName'] = row[7]
 					if  row[8] != "" and "HYPERLINK" in row[8]:
