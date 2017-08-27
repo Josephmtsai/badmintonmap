@@ -8,7 +8,7 @@ import re
 def syncExcelToDB(apiKey,excelsheetid): 
 	sheetList = [u'日',u'一',u'二',u'三',u'四',u'五',u'六']
 	service = discovery.build('sheets', 'v4', developerKey=apiKey,discoveryServiceUrl='https://sheets.googleapis.com/$discovery/rest?version=v4')
-	result = service.spreadsheets().values().batchGet(spreadsheetId=excelsheetid,ranges=sheetList,valueRenderOption='FORMULA').execute()
+	result = service.spreadsheets().values().batchGet(spreadsheetId=excelsheetid,ranges=sheetList,valueRenderOption='FORMULA',dateTimeRenderOption='FORMATTED_STRING').execute()
 	responseSheet = result.get('valueRanges', [])	
 	weekDay = Common.getTodayWeekDay()
 	newLocationDict = {}
@@ -44,9 +44,14 @@ def syncExcelToDB(apiKey,excelsheetid):
 						badmintonInfo['contactPhone'] = re.search(r'=HYPERLINK\("(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/(.*)","(.*)"\)',row[8]).group(5)
 					else:
 						badmintonInfo['contactPhone'] = row[8]
-					badmintonInfo['startTime'] = Common.convertToSTRDateTime(row[0].split("~")[0],index -weekDay)	
-					badmintonInfo['startTimeMillis'] = Common.unix_time_millis( Common.convertToDateTime(row[0].split("~")[0],index -weekDay)	)	
-					badmintonInfo['endTime'] = Common.convertToSTRDateTime(row[0].split("~")[1],index -weekDay)
+					if re.match('(.*):(.*):(.*)', row[0]) is None:
+						badmintonInfo['startTime'] = Common.convertToSTRDateTime(row[0].split("~")[0],index )	
+						badmintonInfo['startTimeMillis'] = Common.unix_time_millis( Common.convertToDateTime(row[0].split("~")[0],index )	)	
+						badmintonInfo['endTime'] = Common.convertToSTRDateTime(row[0].split("~")[1],index )
+					else:
+						badmintonInfo['startTime'] = Common.convertToSTRDateTime(re.match('(.*):(.*)', row[0]).group(1),index )	
+						badmintonInfo['startTimeMillis'] = Common.unix_time_millis( Common.convertToDateTime(re.match('(.*):(.*)', row[0]).group(1),index )	)	
+						badmintonInfo['endTime'] = Common.convertToSTRDateTime(re.match('(.*):(.*)', row[0]).group(2),index )						
 					badmintonInfo['weekDay'] = sheetList[index]
 					badmintonInfo['weekDayInt'] = index
 					badmintonInfo['source'] = "excel"
