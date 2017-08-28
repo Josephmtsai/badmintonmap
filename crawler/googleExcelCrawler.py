@@ -57,7 +57,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 					badmintonInfo['weekDay'] = u"每周" + sheetList[index] 
 					badmintonInfo['weekDayInt'] = index
 					badmintonInfo['source'] = "excel"
-					if len(row) > 9 and "HYPERLINK" in row[1]:
+					if len(row) > 9 and "HYPERLINK" in row[1] and re.match(r'=HYPERLINK\("(.*)","(.*)"\)', row[9]) is not None :
 						badmintonInfo['line'] = re.search(r'=HYPERLINK\("(.*)","(.*)"\)',row[9]).group(2)
 					else :
 						badmintonInfo['line'] = ""
