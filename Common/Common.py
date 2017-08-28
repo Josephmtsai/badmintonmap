@@ -8,7 +8,7 @@ def convertToInt(input):
 
 def convertToSTRDateTime(input,weekday):
     try:
-        timeArray = input.split(":")
+        timeArray = getInputTimeArray(input)
         minuteValue = '0'
         if len( timeArray) > 1:
             minuteValue =timeArray[1]
@@ -17,6 +17,9 @@ def convertToSTRDateTime(input,weekday):
         result = datetime(1970,1,1,0, 0,0,0)    
     return result.strftime("%Y-%m-%d %H:%M")
 
+def getInputTimeArray(input):
+        timeArray = input.split(":")
+    return timeArray
 def getTodayWeekDay():
     return datetime.today().weekday()    
 

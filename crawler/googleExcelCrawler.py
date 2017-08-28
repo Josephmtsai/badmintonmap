@@ -46,17 +46,19 @@ def syncExcelToDB(apiKey,excelsheetid):
 						badmintonInfo['contactPhone'] = row[8]
 					if re.match('([0-9]*):([0-9]*):([0-9]*)', row[0]) is None:
 						badmintonInfo['startTime'] = Common.convertToSTRDateTime(row[0].split("~")[0],index )	
+						badmintonInfo['startHour'] = Common.getInputTimeArray(row[0].split("~")[0])[0]
 						badmintonInfo['startTimeMillis'] = Common.unix_time_millis( Common.convertToDateTime(row[0].split("~")[0],index )	)	
 						badmintonInfo['endTime'] = Common.convertToSTRDateTime(row[0].split("~")[1],index )
 					else:
 						badmintonInfo['startTime'] = Common.convertToSTRDateTime(re.match('(.*):(.*)', row[0]).group(1),index )	
+						badmintonInfo['startHour'] = Common.getInputTimeArray(re.match('(.*):(.*)', row[0]).group(1))[0]
 						badmintonInfo['startTimeMillis'] = Common.unix_time_millis( Common.convertToDateTime(re.match('(.*):(.*)', row[0]).group(1),index )	)	
 						badmintonInfo['endTime'] = Common.convertToSTRDateTime(re.match('(.*):(.*)', row[0]).group(2),index )						
 					badmintonInfo['weekDay'] = u"每周" + sheetList[index] 
 					badmintonInfo['weekDayInt'] = index
 					badmintonInfo['source'] = "excel"
 					if len(row) > 9 and "HYPERLINK" in row[1]:
-						badmintonInfo['line'] = re.search(r'=HYPERLINK\("(.*)","(.*)"\)',row[1]).group(2)
+						badmintonInfo['line'] = re.search(r'=HYPERLINK\("(.*)","(.*)"\)',row[9]).group(2)
 					else :
 						badmintonInfo['line'] = ""
 					badmintonInfo['sourceData'] = row 
