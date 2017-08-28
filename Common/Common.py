@@ -18,7 +18,7 @@ def convertToSTRDateTime(input,weekday):
     return result.strftime("%Y-%m-%d %H:%M")
 
 def getInputTimeArray(input):
-        timeArray = input.split(":")
+    timeArray = input.split(":")
     return timeArray
 def getTodayWeekDay():
     return datetime.today().weekday()    
