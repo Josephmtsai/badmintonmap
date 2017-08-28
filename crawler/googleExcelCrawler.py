@@ -44,7 +44,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 						badmintonInfo['contactPhone'] = re.search(r'=HYPERLINK\("(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/(.*)","(.*)"\)',row[8]).group(5)
 					else:
 						badmintonInfo['contactPhone'] = row[8]
-					if re.match('(.*):(.*):(.*)', row[0]) is None:
+					if re.match('([0-9]*):([0-9]*):([0-9]*)', row[0]) is None:
 						badmintonInfo['startTime'] = Common.convertToSTRDateTime(row[0].split("~")[0],index )	
 						badmintonInfo['startTimeMillis'] = Common.unix_time_millis( Common.convertToDateTime(row[0].split("~")[0],index )	)	
 						badmintonInfo['endTime'] = Common.convertToSTRDateTime(row[0].split("~")[1],index )
@@ -52,11 +52,11 @@ def syncExcelToDB(apiKey,excelsheetid):
 						badmintonInfo['startTime'] = Common.convertToSTRDateTime(re.match('(.*):(.*)', row[0]).group(1),index )	
 						badmintonInfo['startTimeMillis'] = Common.unix_time_millis( Common.convertToDateTime(re.match('(.*):(.*)', row[0]).group(1),index )	)	
 						badmintonInfo['endTime'] = Common.convertToSTRDateTime(re.match('(.*):(.*)', row[0]).group(2),index )						
-					badmintonInfo['weekDay'] = sheetList[index]
+					badmintonInfo['weekDay'] = u"每周" + sheetList[index] 
 					badmintonInfo['weekDayInt'] = index
 					badmintonInfo['source'] = "excel"
 					if len(row) > 9 and "HYPERLINK" in row[1]:
-						badmintonInfo['line'] = re.search(r'=HYPERLINK\("(.*)","(.*)"\)',row[1]).group(1)
+						badmintonInfo['line'] = re.search(r'=HYPERLINK\("(.*)","(.*)"\)',row[1]).group(2)
 					else :
 						badmintonInfo['line'] = ""
 					badmintonInfo['sourceData'] = row 
