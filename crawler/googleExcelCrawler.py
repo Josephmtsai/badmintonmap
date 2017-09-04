@@ -39,7 +39,10 @@ def syncExcelToDB(apiKey,excelsheetid):
 					elif existlocationDict is not None and badmintonInfo['location'].encode('UTF-8')  in existlocationDict:
 						badmintonInfo['position'] = existlocationDict[badmintonInfo['location'].encode('UTF-8')]['position']
 					badmintonInfo['payInfo'] = Common.convertToInt(row[6])
-					badmintonInfo['contactName'] = row[7]
+					if row[7] != "" and "HYPERLINK" in row[7]:
+						badmintonInfo['contactPhone'] = re.search(r'=HYPERLINK\("(.*)","(.*)"\)',row[7]).group(3)
+					else:
+						badmintonInfo['contactName'] = row[7]
 					if  row[8] != "" and "HYPERLINK" in row[8]:
 						badmintonInfo['contactPhone'] = re.search(r'=HYPERLINK\("(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/(.*)","(.*)"\)',row[8]).group(5)
 					else:
@@ -58,7 +61,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 					badmintonInfo['weekDayInt'] = index
 					badmintonInfo['source'] = "excel"
 					if len(row) > 9 and "HYPERLINK" in row[1] and re.match(r'=HYPERLINK\("(.*)","(.*)"\)', row[9]) is not None :
-						badmintonInfo['line'] = re.search(r'=HYPERLINK\("(.*)","(.*)"\)',row[9]).group(2)
+						badmintonInfo['line'] = re.search(r'=HYPERLINK\("(.*)","(.*)"\)',row[9]).group(1)
 					else :
 						badmintonInfo['line'] = ""
 					badmintonInfo['sourceData'] = row 
