@@ -65,7 +65,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 					else :
 						badmintonInfo['line'] = ""
 					badmintonInfo['sourceData'] = row 
-					break
+					#break
 			finally:					
 				badmintonInfoList.append(badmintonInfo)
 	locationList = googleMapLocation.dictToLocationInfoList(newLocationDict)
