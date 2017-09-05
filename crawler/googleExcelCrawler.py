@@ -40,7 +40,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 						badmintonInfo['position'] = existlocationDict[badmintonInfo['location'].encode('UTF-8')]['position']
 					badmintonInfo['payInfo'] = Common.convertToInt(row[6])
 					if row[7] != "" and "HYPERLINK" in row[7]:
-						badmintonInfo['contactPhone'] = re.search(r'=HYPERLINK\("(.*)","(.*)"\)',row[7]).group(3)
+						badmintonInfo['contactName'] = re.search(r'=HYPERLINK\("(.*)","(.*)"\)',row[7]).group(2)
 					else:
 						badmintonInfo['contactName'] = row[7]
 					if  row[8] != "" and "HYPERLINK" in row[8]:
@@ -65,7 +65,7 @@ def syncExcelToDB(apiKey,excelsheetid):
 					else :
 						badmintonInfo['line'] = ""
 					badmintonInfo['sourceData'] = row 
-					#break
+					break
 			finally:					
 				badmintonInfoList.append(badmintonInfo)
 	locationList = googleMapLocation.dictToLocationInfoList(newLocationDict)
