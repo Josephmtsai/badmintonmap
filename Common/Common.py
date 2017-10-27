@@ -15,7 +15,7 @@ def convertToSTRDateTime(input,weekday):
         result = datetime(datetime.today().year, datetime.today().month ,datetime.today().day, int(timeArray[0]), int(minuteValue),0,0) - timedelta(days=getTodayWeekDay())  + timedelta(days=weekday)
     except ValueError:
         result = datetime(1970,1,1,0, 0,0,0)    
-    return result.strftime("%Y-%m-%d %H:%M")
+    return result.strftime("%H:%M")
 
 def getInputTimeArray(input):
     timeArray = input.split(":")
