@@ -32,7 +32,7 @@ class LocationInfoList(Resource):
 
 class CrawlerBadmintonExcelList(Resource):
     def get(self):
-        return googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1--VQHKN0mG-1CwxS_QKbpvFxtfQsDYrUS6PO-fDeIJo")
+        return googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1D5x4XdZRmIDve3QiLCb6KCt-DXIECuHAA_setOOHo2c")
 api.add_resource(HelloWorld, '/')
 api.add_resource(LocationInfoList,'/api/locationinfolist')
 api.add_resource(BadmintonInfoList,'/api/badmintoninfolist')
