@@ -11,7 +11,8 @@ from bson.json_util import dumps
 
 app = Flask(__name__)
 api = Api(app)
-cors = CORS(app, resources={r"/api/*": {"origins": r"(.*).herokuapp.com|http://localhost.*|(.*).mvrater.com"}})
+#cors = CORS(app, resources={r"/api/*": {"origins": r"(.*).herokuapp.com|http://localhost.*|(.*).mvrater.com"}})
+cors = CORS(app, resources={r"/api/*": {"origins": r"*"}})
 class HelloWorld(Resource):
     def get(self):
         return "Hello from flask-rest"
