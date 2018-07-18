@@ -57,14 +57,24 @@ class LineBotHandler(Resource):
         return make_response(dumps(dbHandler.dbHandler.getbadmintonInfoListNow(),ensure_ascii=False))
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    content = dbHandler.dbHandler.getbadmintonInfoListNow()
-    for document in content:
-        locationMessage = "地點: " + document['location'] + " \n"
-        locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-        locationMessage += "價格: " + document['payInfo'] +  " \n"
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
-    if content.count() ==0:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
+    if event.message.text == "今天打球":
+        content = dbHandler.dbHandler.getbadmintonInfoListByParameter('now')
+        for document in content:
+            locationMessage = "地點: " + document['location'] + " \n"
+            locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
+            locationMessage += "價格: " + document['payInfo'] +  " \n"
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
+        if content.count() ==0:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
+    elif event.message.text == "明天打球":
+        content = dbHandler.dbHandler.getbadmintonInfoListByParameter('tomorrow')
+        for document in content:
+            locationMessage = "地點: " + document['location'] + " \n"
+            locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
+            locationMessage += "價格: " + document['payInfo'] +  " \n"
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
+        if content.count() ==0:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
 api.add_resource(HelloWorld, '/')
 api.add_resource(LineBotHandler,'/callback')
 api.add_resource(LocationInfoList,'/api/locationinfolist')
