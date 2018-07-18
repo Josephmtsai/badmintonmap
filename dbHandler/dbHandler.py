@@ -48,7 +48,7 @@ def getbadmintonInfoListByParameter(parameter):
     db = client.heroku_szv1xx0f
     if parameter == 'now':
         weekday = 0 if datetime.now().isoweekday() == 7 else datetime.now().isoweekday()
-        result = db.badmintonInfo.find({"$and": [{'startHour':datetime.now().hour },{'weekDayInt':weekday}]})    
+        result = db.badmintonInfo.find({"$and": [{"startHour": {"$gt": datetime.now().hour}},{'weekDayInt':weekday}]})    
     else:
         weekday = 0 if datetime.now().isoweekday() +1 == 7 else datetime.now().isoweekday() +1
         result = db.badmintonInfo.find({'weekDayInt':weekday})    
