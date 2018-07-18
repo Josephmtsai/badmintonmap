@@ -57,16 +57,13 @@ class LineBotHandler(Resource):
         return make_response(dumps(dbHandler.dbHandler.getbadmintonInfoListNow()),ensure_ascii=False)
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if event.message.text == "今晚打球":
-        content = dbHandler.dbHandler.getbadmintonInfoListNow()
-        for document in content:
-            locationMessage = "地點: " + document['location'] + " \n"
-            locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-            locationMessage += "價格: " + document['payInfo']  " \n"
-            locationMessage += "價格: " + document['payInfo']  " \n"
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
-    else:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
+    content = dbHandler.dbHandler.getbadmintonInfoListNow()
+    for document in content:
+        locationMessage = "地點: " + document['location'] + " \n"
+        locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
+        locationMessage += "價格: " + document['payInfo']  " \n"
+        locationMessage += "價格: " + document['payInfo']  " \n"
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
 api.add_resource(HelloWorld, '/')
 api.add_resource(LineBotHandler,'/callback')
 api.add_resource(LocationInfoList,'/api/locationinfolist')
