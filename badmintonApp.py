@@ -63,10 +63,13 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
         else:
             locationMessage = ""
+            count = 0
             for document in content:
-                locationMessage += "地點: " + document['location'] + " \n"
-                locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-                locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
+                if count <= 10:
+                    locationMessage += "地點: " + document['location'] + " \n"
+                    locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
+                    locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
+                count ++
             print(locationMessage)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
         
@@ -76,10 +79,13 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
         else:
             locationMessage = ""
+            count = 0 
             for document in content:
-                locationMessage += "地點: " + document['location'] + " \n"
-                locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-                locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
+                if count <= 10:
+                    locationMessage += "地點: " + document['location'] + " \n"
+                    locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
+                    locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
+                count ++
             print(locationMessage)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))  
     else:
