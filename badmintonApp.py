@@ -63,7 +63,7 @@ def handle_message(event):
         locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
         locationMessage += "價格: " + document['payInfo'] +  " \n"
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
-    if len(content) ==0:
+    if content.count() ==0:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
 api.add_resource(HelloWorld, '/')
 api.add_resource(LineBotHandler,'/callback')
