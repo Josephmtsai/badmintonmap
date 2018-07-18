@@ -8,10 +8,16 @@ from flask_restful import Resource, Api, reqparse
 from crawler import googleExcelCrawler
 import dbHandler
 from bson.json_util import dumps
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
+line_bot_api = LineBotApi(os.environ.get('LineBotApi'))
+handler = WebhookHandler(os.environ.get('WebhookSECRET'))
 app = Flask(__name__)
 api = Api(app)
 #cors = CORS(app, resources={r"/api/*": {"origins": r"(.*).herokuapp.com|http://localhost.*|(.*).mvrater.com"}})
+
 cors = CORS(app, resources={r"/api/*": {"origins": r"*"}})
 class HelloWorld(Resource):
     def get(self):
@@ -34,6 +40,10 @@ class LocationInfoList(Resource):
 class CrawlerBadmintonExcelList(Resource):
     def get(self):
         return googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1XbJ-pcMbAtLIsYFTMSzIh5hskL4wCZnyR_EWk2cjCD8")
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
 api.add_resource(HelloWorld, '/')
 api.add_resource(LocationInfoList,'/api/locationinfolist')
 api.add_resource(BadmintonInfoList,'/api/badmintoninfolist')
