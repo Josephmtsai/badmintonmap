@@ -59,22 +59,27 @@ class LineBotHandler(Resource):
 def handle_message(event):
     if event.message.text == "今天打球":
         content = dbHandler.dbHandler.getbadmintonInfoListByParameter('now')
-        for document in content:
-            locationMessage = "地點: " + document['location'] + " \n"
-            locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-            locationMessage += "價格: " + str(document['payInfo']) +  " \n"
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
+        locationMessage = ""
         if content.count() ==0:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
+        else:
+            for document in content:
+                locationMessage += "地點: " + document['location'] + " \n"
+                locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
+                locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
+        
     elif event.message.text == "明天打球":
         content = dbHandler.dbHandler.getbadmintonInfoListByParameter('tomorrow')
-        for document in content:
-            locationMessage = "地點: " + document['location'] + " \n"
-            locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-            locationMessage += "價格: " + str(document['payInfo']) +  " \n"
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
+        locationMessage = ""          
         if content.count() ==0:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
+        else:
+            for document in content:
+                locationMessage += "地點: " + document['location'] + " \n"
+                locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
+                locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))  
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
 api.add_resource(HelloWorld, '/')
