@@ -59,6 +59,7 @@ class LineBotHandler(Resource):
 def handle_message(event):
     content = dbHandler.dbHandler.getbadmintonInfoListNow()
     for document in content:
+        print(document)
         locationMessage = "地點: " + document['location'] + " \n"
         locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
         locationMessage += "價格: " + document['payInfo'] +  " \n"
