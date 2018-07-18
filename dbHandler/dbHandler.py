@@ -44,10 +44,10 @@ def getbadmintonInfoList():
     db = client.heroku_szv1xx0f
     return db.badmintonInfo.find({},{'_id':0})
 def getbadmintonInfoListNow():
-    sheetList = [u'日', u'一', u'二', u'三', u'四', u'五', u'六']    
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    result = db.badmintonInfo.find({'startHour':datetime.now().hour },{'weekDayInt':datetime.now().isoweekday()})    
+    weekday = 0 if datetime.now().isoweekday() == 7 else datetime.now().isoweekday()
+    result = db.badmintonInfo.find({"$and": [{'startHour':datetime.now().hour },{'weekDayInt':weekday}]})    
     return result
         
 def deleteAllbadmintonInfoList():
