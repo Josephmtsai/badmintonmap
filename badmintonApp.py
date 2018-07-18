@@ -54,15 +54,15 @@ class LineBotHandler(Resource):
             abort(400)
         return 'OK'
     def get(self):
-        return make_response(dumps(dbHandler.dbHandler.getbadmintonInfoListNow(),ensure_ascii=False))
+        return make_response(dumps(dbHandler.dbHandler.getbadmintonInfoListByParameter('now'),ensure_ascii=False))
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.message.text == "今天打球":
         content = dbHandler.dbHandler.getbadmintonInfoListByParameter('now')
-        locationMessage = ""
         if content.count() ==0:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
         else:
+            locationMessage = ""
             for document in content:
                 locationMessage += "地點: " + document['location'] + " \n"
                 locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
@@ -70,11 +70,11 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
         
     elif event.message.text == "明天打球":
-        content = dbHandler.dbHandler.getbadmintonInfoListByParameter('tomorrow')
-        locationMessage = ""          
+        content = dbHandler.dbHandler.getbadmintonInfoListByParameter('tomorrow')      
         if content.count() ==0:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
         else:
+            locationMessage = ""
             for document in content:
                 locationMessage += "地點: " + document['location'] + " \n"
                 locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
