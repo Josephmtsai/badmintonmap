@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, make_response
+from flask import Flask, make_response,request
 from flask_cors import CORS
 import pymongo
 import os
