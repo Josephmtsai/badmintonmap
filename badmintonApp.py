@@ -67,6 +67,7 @@ def handle_message(event):
                 locationMessage += "地點: " + document['location'] + " \n"
                 locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
                 locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
+            print(locationMessage)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
         
     elif event.message.text == "明天打球":
@@ -79,6 +80,7 @@ def handle_message(event):
                 locationMessage += "地點: " + document['location'] + " \n"
                 locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
                 locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
+            print(locationMessage)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))  
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
