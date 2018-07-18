@@ -54,17 +54,17 @@ class LineBotHandler(Resource):
             abort(400)
         return 'OK'
     def get(self):
-        return make_response(dumps(dbHandler.dbHandler.getbadmintonInfoListNow()),ensure_ascii=False)
+        return make_response(dumps(dbHandler.dbHandler.getbadmintonInfoListNow(),ensure_ascii=False))
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     content = dbHandler.dbHandler.getbadmintonInfoListNow()
     for document in content:
-        print(document)
         locationMessage = "地點: " + document['location'] + " \n"
         locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
         locationMessage += "價格: " + document['payInfo'] +  " \n"
-        locationMessage += "價格: " + document['payInfo']  +" \n"
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
+    if len(content) ==0:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
 api.add_resource(HelloWorld, '/')
 api.add_resource(LineBotHandler,'/callback')
 api.add_resource(LocationInfoList,'/api/locationinfolist')
