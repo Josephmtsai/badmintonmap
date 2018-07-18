@@ -3,6 +3,8 @@ import pymongo
 from bson.json_util import dumps
 import os
 import settings
+from datetime import datetime, timedelta
+from pytz import timezone
 MONGO_URL = os.environ.get('MONGODB_URI')
 
 
@@ -42,7 +44,11 @@ def getbadmintonInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
     return db.badmintonInfo.find({},{'_id':0})
-    
+def getbadmintonInfoListNow():
+    sheetList = [u'日', u'一', u'二', u'三', u'四', u'五', u'六']    
+    client = pymongo.MongoClient(MONGO_URL)
+    db = client.heroku_szv1xx0f
+    return db.badmintonInfo.find({'startHour':datetime.now().hour },{'weekDayInt':datetime.now().isoweekday()})    
 def deleteAllbadmintonInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
