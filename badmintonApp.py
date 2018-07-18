@@ -59,7 +59,11 @@ class LineBotHandler(Resource):
 def handle_message(event):
     if event.message.text == "今晚打球":
         content = dbHandler.dbHandler.getbadmintonInfoListNow()
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
+        for document in content:
+            locationMessage = "地點: " + document['location'] + " \n"
+            locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
+            locationMessage += "價格: " + document['payInfo']  " \n"
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
 api.add_resource(HelloWorld, '/')

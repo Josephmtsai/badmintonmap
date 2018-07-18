@@ -8,7 +8,6 @@ from pytz import timezone
 MONGO_URL = os.environ.get('MONGODB_URI')
 
 
-
 def insertStatus(status):
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
@@ -48,7 +47,9 @@ def getbadmintonInfoListNow():
     sheetList = [u'日', u'一', u'二', u'三', u'四', u'五', u'六']    
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
-    return db.badmintonInfo.find({'startHour':datetime.now().hour },{'weekDayInt':datetime.now().isoweekday()})    
+    result = db.badmintonInfo.find({'startHour':datetime.now().hour },{'weekDayInt':datetime.now().isoweekday()})    
+    return result
+        
 def deleteAllbadmintonInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
