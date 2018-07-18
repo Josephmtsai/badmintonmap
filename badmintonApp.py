@@ -61,8 +61,8 @@ def handle_message(event):
     for document in content:
         locationMessage = "地點: " + document['location'] + " \n"
         locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-        locationMessage += "價格: " + document['payInfo']  " \n"
-        locationMessage += "價格: " + document['payInfo']  " \n"
+        locationMessage += "價格: " + document['payInfo'] +  " \n"
+        locationMessage += "價格: " + document['payInfo']  +" \n"
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
 api.add_resource(HelloWorld, '/')
 api.add_resource(LineBotHandler,'/callback')
