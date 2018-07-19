@@ -40,6 +40,5 @@ def convertToDateTime(input,weekday):
     return result
 
 def getLocationDistance(currentlocation,targetlocation):
-    currentlocationTuple = (currentlocation['latitude'],currentlocation['longitude'])
     targetlocationTuple = (targetlocation['position']['lat'],targetlocation['position']['lng'])
     return distance.distance(currentlocation, targetlocation).km
