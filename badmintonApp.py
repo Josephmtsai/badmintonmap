@@ -62,16 +62,7 @@ def handle_message(event):
         if content.count() ==0:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
         else:
-            locationMessage = ""
-            count = 0
-            for document in content:
-                if count <= 15:
-                    locationMessage += "地點: " + document['location'] + " "
-                    locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-                    locationMessage += document['contactName'] + " ~ " +  document['contactPhone'] + " \n"
-                    locationMessage += "價格: " + str(document['payInfo']) +  " \n"
-                count+=1
-            print(locationMessage)
+            locationMessage = MessageHandler.convertDataToString(content,15)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
         
     elif event.message.text == "明天打球":
@@ -79,16 +70,7 @@ def handle_message(event):
         if content.count() ==0:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
         else:
-            locationMessage = ""
-            count = 0 
-            for document in content:
-                if count <= 15:
-                    locationMessage += "地點: " + document['location'] + " "
-                    locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-                    locationMessage += document['contactName'] + " ~ " +  document['contactPhone'] + " \n"
-                    locationMessage += "價格: " + str(document['payInfo']) +  " \n\n"
-                count+=1
-            print(locationMessage)
+            locationMessage = MessageHandler.convertDataToString(content,15)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))  
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
