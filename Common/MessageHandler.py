@@ -16,12 +16,11 @@ def getBadmintonDataFromLocation(result,currentLocation,topNums=10):
     return convertDataToString(sorted(badmintonInfoArray, key=lambda x: x['distance'])[:topNums])
 def convertDataToString(sortedResult,maxCounter=999):
     message = ''
-    counter =0
-    for data in sortedResult:      
-        if counter < maxCounter: 
-            message +=  data['location'] +" \n"
-            message +=  data['startTime'] + " ~ " +  data['endTime'] + " \n"
-            message +=  data['contactName'] + " ~ " +  data['contactPhone'] + " \n"
-            message +=  "價格: " + str(data['payInfo']) +  " \n"
-            message +=  "程度:" +data['level']  + "\n\n"  
+    results = sortedResult[:maxCounter]
+    for data in results:      
+        message +=  data['location'] +" \n"
+        message +=  data['startTime'] + " ~ " +  data['endTime'] + " \n"
+        message +=  data['contactName'] + " ~ " +  data['contactPhone'] + " \n"
+        message +=  "價格: " + str(data['payInfo']) +  " \n"
+        message +=  "程度:" +data['level']  + "\n\n"  
     return message        

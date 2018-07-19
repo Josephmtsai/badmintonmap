@@ -62,7 +62,7 @@ def handle_message(event):
         if content.count() ==0:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
         else:
-            locationMessage = MessageHandler.convertDataToString(content,15)
+            locationMessage = MessageHandler.convertDataToString(content,10)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
         
     elif event.message.text == "明天打球":
@@ -70,7 +70,7 @@ def handle_message(event):
         if content.count() ==0:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="No badminton info right now"))
         else:
-            locationMessage = MessageHandler.convertDataToString(content,15)
+            locationMessage = MessageHandler.convertDataToString(content,10)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))  
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
