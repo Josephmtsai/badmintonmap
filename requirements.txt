@@ -29,3 +29,5 @@ Werkzeug==0.12.2
 python-dotenv==0.6.4
 line-bot-sdk==1.7.2
 future==0.16.0
+geographiclib==1.49
+geopy==1.15.0

@@ -26,6 +26,8 @@ pip install -r requirements.txt
 
 heroku config:get GoogleAuthKey -s  >> .env --app=qatbadmap
 heroku config:get MONGODB_URI -s  >> .env --app=qatbadmap
+heroku config:get LineBotApi -s  >> .env --app=qatbadmap
+heroku config:get WebhookSECRET -s  >> .env --app=qatbadmap
 ```
 
 ## Start program

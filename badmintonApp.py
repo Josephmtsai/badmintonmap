@@ -10,8 +10,8 @@ import dbHandler
 from bson.json_util import dumps
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
-
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, LocationMessage
+from Common import MessageHandler
 line_bot_api = LineBotApi(os.environ.get('LineBotApi'))
 handler = WebhookHandler(os.environ.get('WebhookSECRET'))
 app = Flask(__name__)
@@ -92,6 +92,11 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))  
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_Location_message(event):
+    content = dbHandler.dbHandler.getbadmintonInfoListByParameter('now')
+    message = MessageHandler.getBadmintonDataFromLocation(content,event.message)
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=message))  
 api.add_resource(HelloWorld, '/')
 api.add_resource(LineBotHandler,'/callback')
 api.add_resource(LocationInfoList,'/api/locationinfolist')

@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from geopy import distance
 def convertToInt(input):
     try:
         result = int(input)
@@ -37,4 +38,8 @@ def convertToDateTime(input,weekday):
     except ValueError:
         result = datetime(1970,1,1,0, 0,0,0)    
     return result
-    
+
+def getLocationDistance(currentlocation,targetlocation):
+    currentlocationTuple = (currentlocation['latitude'],currentlocation['longitude'])
+    targetlocationTuple = (targetlocation['position']['lat'],targetlocation['position']['lng'])
+    return distance.distance(currentlocation, targetlocation).km

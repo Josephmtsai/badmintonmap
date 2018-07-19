@@ -5,6 +5,7 @@ import os
 import settings
 from datetime import datetime, timedelta
 from pytz import timezone
+from Common import Common
 MONGO_URL = os.environ.get('MONGODB_URI')
 
 
@@ -53,7 +54,7 @@ def getbadmintonInfoListByParameter(parameter):
         weekday = 0 if datetime.now().isoweekday() +1 == 7 else datetime.now().isoweekday() +1
         result = db.badmintonInfo.find({"$and": [{"startHour": {"$gt": 17}},{'weekDayInt':weekday}]})    
     return result
-        
+
 def deleteAllbadmintonInfoList():
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
