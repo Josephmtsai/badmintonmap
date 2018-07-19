@@ -65,10 +65,11 @@ def handle_message(event):
             locationMessage = ""
             count = 0
             for document in content:
-                if count <= 10:
-                    locationMessage += "地點: " + document['location'] + " \n"
+                if count <= 15:
+                    locationMessage += "地點: " + document['location'] + " "
                     locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-                    locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
+                    locationMessage += document['contactName'] + " ~ " +  document['contactPhone'] + " \n"
+                    locationMessage += "價格: " + str(document['payInfo']) +  " \n"
                 count+=1
             print(locationMessage)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
@@ -81,10 +82,11 @@ def handle_message(event):
             locationMessage = ""
             count = 0 
             for document in content:
-                if count <= 10:
-                    locationMessage += "地點: " + document['location'] + " \n"
+                if count <= 15:
+                    locationMessage += "地點: " + document['location'] + " "
                     locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
-                    locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
+                    locationMessage += document['contactName'] + " ~ " +  document['contactPhone'] + " \n"
+                    locationMessage += "價格: " + str(document['payInfo']) +  " \n\n"
                 count+=1
             print(locationMessage)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))  
