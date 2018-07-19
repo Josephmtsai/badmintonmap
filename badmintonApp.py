@@ -69,7 +69,7 @@ def handle_message(event):
                     locationMessage += "地點: " + document['location'] + " \n"
                     locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
                     locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
-                count ++
+                count+=1
             print(locationMessage)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))
         
@@ -85,7 +85,7 @@ def handle_message(event):
                     locationMessage += "地點: " + document['location'] + " \n"
                     locationMessage += "時間: " + document['startTime'] + " ~ " +  document['endTime'] + " \n"
                     locationMessage += "價格: " + str(document['payInfo']) +  " \n\n\n\n"
-                count ++
+                count+=1
             print(locationMessage)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))  
     else:
