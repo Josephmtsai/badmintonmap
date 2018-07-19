@@ -78,7 +78,8 @@ def handle_message(event):
 def handle_Location_message(event):
     content = dbHandler.dbHandler.getbadmintonInfoListByParameter('now')
     locationTuple = (event.message.latitude,event.message.longitude)
-    message = MessageHandler.getBadmintonDataFromLocation(content,locationTuple)
+    message += "今晚打球場地以距離判斷:\n"
+    message =  MessageHandler.getBadmintonDataFromLocation(content,locationTuple)
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=message))  
 api.add_resource(HelloWorld, '/')
 api.add_resource(LineBotHandler,'/callback')
