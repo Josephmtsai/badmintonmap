@@ -11,7 +11,7 @@ def getBadmintonDataFromLocation(result,currentLocation,topNums=10):
         badmintonInfo['contactName'] =  document['contactName'] 
         badmintonInfo['contactPhone'] =  document['contactPhone'] 
         badmintonInfo['payInfo'] =  document['payInfo'] 
-        badmintonInfo['level']  =  document['payInfo']  
+        badmintonInfo['level']  =  document['level']  
         badmintonInfoArray.append(badmintonInfo)
     return convertDataToString(sorted(badmintonInfoArray, key=lambda x: x['distance'])[:topNums])
 def convertDataToString(sortedResult,maxCounter=999):
@@ -23,5 +23,5 @@ def convertDataToString(sortedResult,maxCounter=999):
             message +=  data['startTime'] + " ~ " +  data['endTime'] + " \n"
             message +=  data['contactName'] + " ~ " +  data['contactPhone'] + " \n"
             message +=  "價格: " + str(data['payInfo']) +  " \n"
-            message +=  "程度:" +data['payInfo']  + "\n\n"  
+            message +=  "程度:" +data['level']  + "\n\n"  
     return message        
