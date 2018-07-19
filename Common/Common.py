@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from geopy import distance
+from geopy.distance import vincenty
 def convertToInt(input):
     try:
         result = int(input)
@@ -41,4 +41,4 @@ def convertToDateTime(input,weekday):
 
 def getLocationDistance(currentlocation,targetlocation):
     targetlocationTuple = (targetlocation['position']['lat'],targetlocation['position']['lng'])
-    return distance.distance(lonlat(currentlocation), lonlat(targetlocation)).km
+    return vincenty(currentlocation, targetlocationTuple).km
