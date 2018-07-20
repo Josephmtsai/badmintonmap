@@ -50,10 +50,10 @@ def getbadmintonInfoListByParameter(parameter):
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
     if parameter == 'now':
-        weekday = 0 if datetime.datetime.now().astimezone(tw).isoweekday() == 7 else datetime.datetime.now().astimezone(tw).isoweekday() +1
+        weekday = 0 if datetime.now().astimezone(tw).isoweekday() == 7 else datetime.now().astimezone(tw).isoweekday() +1
         result = db.badmintonInfo.find({"$and": [{"startHour": {"$gt": 17}},{'weekDayInt':weekday}]})    
     else:
-        weekday = 0 if datetime.datetime.now().astimezone(tw).isoweekday() +1 == 7 else datetime.datetime.now().astimezone(tw).isoweekday() +1
+        weekday = 0 if datetime.now().astimezone(tw).isoweekday() +1 == 7 else datetime.now().astimezone(tw).isoweekday() +1
         result = db.badmintonInfo.find({"$and": [{"startHour": {"$gt": 17}},{'weekDayInt':weekday}]})    
     return result
 
