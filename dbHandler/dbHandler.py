@@ -5,6 +5,8 @@ import os
 import settings
 from datetime import datetime, timedelta
 from pytz import timezone
+import pytz
+tw = timezone('Asia/Taipei')
 from Common import Common
 MONGO_URL = os.environ.get('MONGODB_URI')
 
@@ -48,10 +50,10 @@ def getbadmintonInfoListByParameter(parameter):
     client = pymongo.MongoClient(MONGO_URL)
     db = client.heroku_szv1xx0f
     if parameter == 'now':
-        weekday = 0 if datetime.now().isoweekday() == 7 else datetime.now().isoweekday()
+        weekday = 0 if datetime.datetime.now().astimezone(tw).isoweekday() == 7 else datetime.datetime.now().astimezone(tw).isoweekday() +
         result = db.badmintonInfo.find({"$and": [{"startHour": {"$gt": 17}},{'weekDayInt':weekday}]})    
     else:
-        weekday = 0 if datetime.now().isoweekday() +1 == 7 else datetime.now().isoweekday() +1
+        weekday = 0 if datetime.datetime.now().astimezone(tw).isoweekday() +1 == 7 else datetime.datetime.now().astimezone(tw).isoweekday() +1
         result = db.badmintonInfo.find({"$and": [{"startHour": {"$gt": 17}},{'weekDayInt':weekday}]})    
     return result
 
