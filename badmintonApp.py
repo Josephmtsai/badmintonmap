@@ -39,7 +39,7 @@ class LocationInfoList(Resource):
 
 class CrawlerBadmintonExcelList(Resource):
     def get(self):
-        return googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1XbJ-pcMbAtLIsYFTMSzIh5hskL4wCZnyR_EWk2cjCD8")
+        return googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1stkgvDFxKNf5V6Ozu7RMAK57oWzZkUNrfruXuiY1cDc")
 
 class LineBotHandler(Resource):
     def post(self):
