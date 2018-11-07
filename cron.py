@@ -9,7 +9,7 @@ sched = BlockingScheduler()
 #test
 @sched.scheduled_job('interval', minutes=720)
 def crawler_job():
-    googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1XbJ-pcMbAtLIsYFTMSzIh5hskL4wCZnyR_EWk2cjCD8")
+    googleExcelCrawler.syncExcelToDB(os.environ.get('GoogleAuthKey'),"1stkgvDFxKNf5V6Ozu7RMAK57oWzZkUNrfruXuiY1cDc")
     print('This job is insert data')
     print('This job is run every 720 minutes.')
 @sched.scheduled_job('interval', minutes=60)
