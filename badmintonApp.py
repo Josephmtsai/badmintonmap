@@ -74,7 +74,7 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=locationMessage))  
     else:
         profile = line_bot_api.get_profile(event.source.user_id)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text + event.source.userId + '\n' + profile.display_name))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text + event.source.user_id + '\n' + profile.display_name))
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_Location_message(event):
     content = dbHandler.dbHandler.getbadmintonInfoListByParameter('now')
