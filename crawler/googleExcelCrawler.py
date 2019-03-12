@@ -96,3 +96,12 @@ def syncExcelToDB(apiKey, excelsheetid):
     dbHandler.insertStatus({'locationInsert': len(
         locationList), 'Time': datetime.datetime.utcnow() + datetime.timedelta(hours=+8)})
     return dbHandler.insertbadmintonInfoList(badmintonInfoList)
+
+
+def getSheetNames(apiKey, excelsheetid):
+    service = discovery.build('sheets', 'v4', developerKey=apiKey,
+                              discoveryServiceUrl='https://sheets.googleapis.com/$discovery/rest?version=v4')
+    sheet_metadata = service.spreadsheets().get(
+        spreadsheetId=excelsheetid).execute()
+    sheets = sheet_metadata.get('sheets', '')
+    return sheets
