@@ -16,7 +16,7 @@ line_bot_api = LineBotApi(os.environ.get('LineBotApi'))
 handler = WebhookHandler(os.environ.get('WebhookSECRET'))
 app = Flask(__name__)
 api = Api(app)
-#cors = CORS(app, resources={r"/api/*": {"origins": r"(.*).herokuapp.com|http://localhost.*|(.*).mvrater.com"}})
+# cors = CORS(app, resources={r"/api/*": {"origins": r"(.*).herokuapp.com|http://localhost.*|(.*).mvrater.com"}})
 
 cors = CORS(app, resources={r"/api/*": {"origins": r"*"}})
 
@@ -46,7 +46,7 @@ class GetSheetNames(Resource):
         self.parser.add_argument(
             'sheetid', type=str, help='sheetid must be string')
         args = self.parser.parse_args()
-        return make_response(googleExcelCrawler.getSheetNames(os.environ.get('GoogleAuthKey'), args['sheetid']))
+        return make_response(dumps(googleExcelCrawler.getSheetNames(os.environ.get('GoogleAuthKey'), args['sheetid']), ensure_ascii=False))
 
 
 class CrawlerBadmintonExcelList(Resource):

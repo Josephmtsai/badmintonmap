@@ -104,4 +104,9 @@ def getSheetNames(apiKey, excelsheetid):
     sheet_metadata = service.spreadsheets().get(
         spreadsheetId=excelsheetid).execute()
     sheets = sheet_metadata.get('sheets', '')
-    return sheets
+    titleList = []
+    for sheet in sheets:
+        title = sheet['properties']['title']
+        titleList.append(title)
+    print(titleList)
+    return titleList
