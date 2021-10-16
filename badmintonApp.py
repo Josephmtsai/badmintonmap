@@ -73,7 +73,7 @@ class LineBotHandler(Resource):
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if event.message.text == "今天打球":
+    if event.message.text == "今天打球a":
         content = dbHandler.dbHandler.getbadmintonInfoListByParameter('now')
         if content.count() == 0:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(
